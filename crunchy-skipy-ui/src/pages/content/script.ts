@@ -1,4 +1,5 @@
 import { APP_CONFIG_DATA_PROPERTY } from '../../constants';
+import tokenApiService from '../../service/tokenApiService';
 
 const getProperty = (property: string): Promise<any> => {
   return new Promise((resolve, reject) => {
@@ -28,6 +29,14 @@ const getProperty = (property: string): Promise<any> => {
   });
 };
 
+const tokenSuccess = () => {
+    console.log('v nice');
+}
+
+const tokenError = () => {
+    console.log('duma content token fail');
+}
+
 // Function called when a new message is received
 const messagesHandler = (message: any): any => {
   (async (): Promise<void> => {
@@ -36,6 +45,7 @@ const messagesHandler = (message: any): any => {
       console.log('result', result);
 
       window.localStorage.setItem('Authorization', `Basic ${btoa(`${result.accountAuthClientId}:`)}`);
+      tokenApiService.postTokenInformation('grant_type=etp_rt_cookie', tokenSuccess, tokenError);
     chrome.runtime.sendMessage({
       type: 'get_auth_data',
       payload: result,
@@ -49,6 +59,3 @@ const messagesHandler = (message: any): any => {
  * Fired when a message is sent from either an extension process or a content script.
  */
 chrome.runtime.onMessage.addListener(messagesHandler);
-
-console.log('Content script works!');
-console.log('Must reload extension for modifications to take effect.');

@@ -9,7 +9,6 @@ const postTokenInformation = async (
         await tokenApi.postToken(requestBody);
         onSuccess();
     } catch (error) {
-        console.log('error from postTokenInformation', error);
         onError();
     }
 }
