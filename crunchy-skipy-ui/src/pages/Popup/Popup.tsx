@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Popup.css';
-import { DOMMessage, DOMMessageResponse } from '../content/types';
+import { Message } from '../../contracts/Message.interface';
 
 const Popup = () => {
   const [title, setTitle] = useState('');
@@ -26,12 +26,12 @@ const Popup = () => {
            */
           chrome.tabs.sendMessage(
             tabs[0].id || 0,
-            { type: 'GET_DOM' } as DOMMessage,
-            (response: DOMMessageResponse) => {
+            { type: 'get_dom' } as Message,
+              (response: Message) => {
               if (chrome.runtime.lastError) {
                 setTimeout(() => console.log('Initial timeout!'), 1000);
               } else {
-                setTitle(response.title);
+                setTitle(response.payload);
               }
             }
           );

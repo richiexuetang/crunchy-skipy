@@ -1,30 +1,37 @@
-type MessageType = 'get_auth_data';
+import { Message } from '../../contracts/Message.interface';
+import tokenApiService from '../../service/tokenApiService';
+import "regenerator-runtime/runtime.js";
 
-type Message = {
-  type: MessageType;
-  payload?: any;
-  uuid?: string;
-};
+const tokenSuccess = () => {
+    console.log('v nice');
+}
+
+const tokenError = () => {
+    console.log('duma token fail');
+}
 
 /**
  * Relay messages between content scripts.
  *
  */
-const messageHandler = (message: Message, sender: any): Promise<any> => {
-  return new Promise((resolve, reject) => {
-    (async () => {
-      return (async (): Promise<any> => {
-        try {
-          console.log('returned message is:', message);
-        } catch (err: any) {
-          console.log('message handler error');
-          return err;
+const messageHandler = (
+    message: Message,
+    sender: chrome.runtime.MessageSender
+): any => {
+    const tabId = sender.tab?.id;
+
+    if (!tabId) {
+        return Promise.reject(new Error('Tab id not found'));
+    }
+
+    switch (message.type) {
+        case 'get_auth_data': {
+            tokenApiService.postTokenInformation('grant_type=etp_rt_cookie', tokenSuccess, tokenError);
+            break;
         }
-      })();
-    })();
-  });
+        default: {
+            console.log('nothing to see here');
+        }
+    }
 };
 chrome.runtime.onMessage.addListener(messageHandler);
-
-console.log('This is the background page.');
-console.log('Put the background scripts here.');

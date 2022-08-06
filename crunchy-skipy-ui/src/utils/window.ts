@@ -3,7 +3,6 @@
  */
 ((): void => {
   const { currentScript } = document;
-  console.log('document is ', document, 'currentScript is', currentScript);
 
   /**
    * Retrieves the property and sets it as the data attribute.
@@ -13,8 +12,7 @@
       return;
     }
 
-    const { property } = currentScript.dataset;
-    console.log('currentScript.dataset is', currentScript.dataset);
+    const { property } = currentScript?.dataset;
     if (!property) {
       return;
     }
@@ -49,5 +47,3 @@
 
   window.addEventListener('load', listener);
 })();
-
-console.log('Window is working!');

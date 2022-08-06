@@ -30,6 +30,6 @@
       "matches": ["https://beta.crunchyroll.com/*"]
     }
   ],
-  "permissions": ["scripting"],
+  "permissions": ["scripting", "storage"],
   "host_permissions": ["*://beta.crunchyroll.com/*", "*://localhost/*"]
 }

@@ -1,3 +1,5 @@
+import { APP_CONFIG_DATA_PROPERTY } from '../../constants';
+
 const getProperty = (property: string): Promise<any> => {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
@@ -9,7 +11,6 @@ const getProperty = (property: string): Promise<any> => {
 
     new MutationObserver((_mutations, observer) => {
       const { value } = script.dataset;
-      console.log('value from getProperty is:', value);
       if (!value) {
         return;
       }
@@ -30,9 +31,11 @@ const getProperty = (property: string): Promise<any> => {
 // Function called when a new message is received
 const messagesHandler = (message: any): any => {
   (async (): Promise<void> => {
-    const result = await getProperty('__APP_CONFIG__.cxApiParams');
-    console.log(result);
+      const result = await getProperty(APP_CONFIG_DATA_PROPERTY);
+      console.log('message parameter from content messageHandler', message);
+      console.log('result', result);
 
+      window.localStorage.setItem('Authorization', `Basic ${btoa(`${result.accountAuthClientId}:`)}`);
     chrome.runtime.sendMessage({
       type: 'get_auth_data',
       payload: result,
