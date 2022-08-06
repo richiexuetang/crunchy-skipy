@@ -1,17 +1,30 @@
-import browser from 'webextension-polyfill';
+type MessageType = 'get_auth_data';
+
+type Message = {
+  type: MessageType;
+  payload?: any;
+  uuid?: string;
+};
 
 /**
  * Relay messages between content scripts.
  *
  */
-const messageHandler = (details: any): Promise<any> => {
+const messageHandler = (message: Message, sender: any): Promise<any> => {
   return new Promise((resolve, reject) => {
-    //console.log('document is:', document);
-    console.log(`Woo got a request, here's the details!`, details);
+    (async () => {
+      return (async (): Promise<any> => {
+        try {
+          console.log('returned message is:', message);
+        } catch (err: any) {
+          console.log('message handler error');
+          return err;
+        }
+      })();
+    })();
   });
 };
-
-browser.webNavigation.onCompleted.addListener(messageHandler);
+chrome.runtime.onMessage.addListener(messageHandler);
 
 console.log('This is the background page.');
 console.log('Put the background scripts here.');

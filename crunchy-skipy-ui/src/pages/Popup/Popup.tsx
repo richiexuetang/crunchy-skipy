@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Popup.css';
-import { DOMMessage, DOMMessageResponse } from '../Content/types';
+import { DOMMessage, DOMMessageResponse } from '../content/types';
 
 const Popup = () => {
   const [title, setTitle] = useState('');
