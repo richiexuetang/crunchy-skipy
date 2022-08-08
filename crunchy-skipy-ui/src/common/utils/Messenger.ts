@@ -1,5 +1,6 @@
-import { debug } from "../../utils/log";
-import { sleep } from "../../utils/time";
+import { debug } from "./log";
+import { sleep } from "./time";
+
 
 export const getErrorMessage = (err: unknown): string => {
     if (err == null) return '';

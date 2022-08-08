@@ -11,4 +11,4 @@ export class Episode {
     }
 }
 
-export const tokenApi = new Episode();
+export const episodeApi = new Episode();

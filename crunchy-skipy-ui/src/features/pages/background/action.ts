@@ -1,4 +1,5 @@
-import { loadedLog, log } from "../../utils/log";
+import { loadedLog, log } from "../../../common/utils/log";
+
 
 
 export function initAction() {
@@ -8,6 +9,7 @@ export function initAction() {
         if (!tab.active || !tab.url) return;
     }
 
+    // #region Tab actions
     async function updateActiveTabUrl(tab: chrome.tabs.Tab) {
         chrome.storage.local.set({ 'supported-website-check-url': tab.url || null });
         log('Updated current tab in storage to:', tab.url || null);
@@ -23,4 +25,11 @@ export function initAction() {
         await onTabChanged(tab);
         if (tab.active) await updateActiveTabUrl(tab);
     });
+    // #endregion
+
+    //#region Storage actions
+    chrome.storage.onChanged.addListener(async (changes: chrome.storage.StorageChange, area: string) => {
+
+    });
+    // #endregion
 }

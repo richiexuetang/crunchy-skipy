@@ -30,7 +30,17 @@
     "quotes": [ "error", "single" ],
     "no-duplicate-imports": "error"
   },
-  "import/resolver": {
-    "typescript": {}
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [ ".ts", ".tsx" ]
+    },
+    "import/resolver": {
+      "typescript": {
+        "project": [ "tsconfig.json", "package/tsconfig.json" ]
+      },
+      "node": {
+        "project": [ "tsconfig.json", "package/tsconfig.json" ]
+      }
+    }
   }
 }

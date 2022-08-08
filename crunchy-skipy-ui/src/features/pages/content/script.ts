@@ -1,4 +1,4 @@
-import { error, log } from '../../utils/log';
+import { error, log } from '../../../common/utils/log';
 import { initCrunchyParent } from './services/parent';
 
 try {

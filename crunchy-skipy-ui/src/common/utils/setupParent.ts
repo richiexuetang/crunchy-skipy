@@ -1,6 +1,6 @@
-import { error, log } from '../../utils/log';
-import { sleep } from '../../utils/time';
+import { error, log } from './log';
 import Messenger from './Messenger';
+import { sleep } from './time';
 
 export interface InferredEpisodeInfo {
     name?: string;
@@ -20,7 +20,7 @@ export default function setupParent(
     // should be expecting a different episode
     let previousUrl: string | undefined;
     let previousEpisodeName: string | undefined;
-
+    log('Service in setup Parent is:', service);
     new Messenger<
         ParentMessageTypes,
         ParentMessageListenerMap,

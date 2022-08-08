@@ -1,5 +1,5 @@
-import Messenger from "../../common/utils/Messenger";
-import { loadedLog, log } from "../../utils/log";
+import { loadedLog, log } from "../../../common/utils/log";
+import Messenger from "../../../common/utils/Messenger";
 
 
 export function initMessenger() {

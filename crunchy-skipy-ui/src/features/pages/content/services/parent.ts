@@ -1,7 +1,7 @@
+import { error, loadedLog, log } from '../../../../common/utils/log';
+import setupParent from '../../../../common/utils/setupParent';
+import { waitUntil } from '../../../../common/utils/time';
 import { getService } from './util';
-import { waitUntil } from '../../../utils/time';
-import setupParent from '../../../common/utils/setupParent';
-import { error, loadedLog, log } from '../../../utils/log';
 
   /**
    * Returns episode information.
