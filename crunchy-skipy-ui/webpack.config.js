@@ -45,7 +45,7 @@ var options = {
     window: path.join(__dirname, 'src', 'utils', 'window.ts'),
   },
   chromeExtensionBoilerplate: {
-    notHotReload: ['background', 'contentScript', 'devtools'],
+    notHotReload: ['background', 'contentScript', 'devtools', 'window'],
   },
   output: {
     filename: '[name].bundle.js',
@@ -143,22 +143,13 @@ var options = {
       ],
     }),
     new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: 'src/assets/img/icon-128.png',
-          to: path.join(__dirname, 'build'),
-          force: true,
-        },
-      ],
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: 'src/assets/img/icon-34.png',
-          to: path.join(__dirname, 'build'),
-          force: true,
-        },
-      ],
+        patterns: [
+            {
+                from: './src/assets/img/*.png',
+                to: '[name].png',
+                force: true,
+            },
+        ],
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'pages', 'options', 'index.html'),

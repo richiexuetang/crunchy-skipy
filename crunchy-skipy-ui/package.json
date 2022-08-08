@@ -8,8 +8,9 @@
     "url": "https://github.com/richiexuetang/crunchy-skipy.git"
   },
   "scripts": {
-    "build": "node webpack/build.js",
-    "start": "node webpack/webserver.js",
+    "build:dev:chrome": "cross-env NODE_ENV=development BROWSER=chromium BUILD=true webpack --config ./webpack/.env.js",
+    "build": "set \"INLINE_RUNTIME_CHUNK=false\" && node webpack/build.js",
+    "start": "set \"INLINE_RUNTIME_CHUNK=false\" && node webpack/webserver.js",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
@@ -22,7 +23,8 @@
     "net": "^1.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hot-loader": "^4.13.0"
+    "react-hot-loader": "^4.13.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.0",
@@ -32,6 +34,7 @@
     "@types/chrome": "^0.0.177",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
+    "@types/uuid": "^8.3.4",
     "@types/webextension-polyfill": "^0.9.0",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.32.0",

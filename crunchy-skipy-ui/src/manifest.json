@@ -5,10 +5,13 @@
   "options_page": "options.html",
   "background": { "service_worker": "background.bundle.js" },
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": "icon-34.png"
+    "default_icon": { 
+      "32": "icon-34.png" 
+    },
+    "default_popup": "popup.html"
   },
   "icons": {
+    "32": "icon-34.png",
     "128": "icon-128.png"
   },
   "content_scripts": [
@@ -23,13 +26,13 @@
   "web_accessible_resources": [
     {
       "resources": ["content.styles.css", "icon-128.png", "icon-34.png"],
-      "matches": []
+      "matches": [ "https://beta.crunchyroll.com/*" ]
     },
     {
       "resources": ["window.bundle.js"],
       "matches": ["https://beta.crunchyroll.com/*"]
     }
   ],
-  "permissions": ["scripting", "storage"],
+  "permissions": ["scripting", "storage", "activeTab", "tabs", "declarativeContent" ],
   "host_permissions": ["*://beta.crunchyroll.com/*", "*://localhost/*"]
 }

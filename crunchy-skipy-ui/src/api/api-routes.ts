@@ -1,3 +1,5 @@
 export enum ApiRoute {
-    Token = 'auth/v1/token'
+    PostToken = 'auth/v1/token',
+    GetEpisodeIdObject = 'objects/',
+    GetIndex = '/index/v2'
 }
