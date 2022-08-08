@@ -3,16 +3,16 @@ import { rootReducer } from '..'
 import { BaseApi } from '../../../service/network-agents/base.api';
 
 const store = configureStore({
-    reducer: rootReducer,
-    devTools: process.env.NODE_ENV !== 'production',
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: true,
-            immutableCheck: true,
-        })
-    });
+  reducer: rootReducer,
+  devTools: process.env.NODE_ENV !== 'production',
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: true,
+      immutableCheck: true,
+    })
+});
 
-/*BaseApi.getInstance().applyInterceptors(
+/* BaseApi.getInstance().applyInterceptors(
     {
         onFulfilled: applyNetworkTrafficObserver(store),
     },

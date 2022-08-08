@@ -10,7 +10,7 @@ interface AllMessageResponses
     ParentMessageResponseMap,
     RuntimeMessageResponseMap {}
 
-//#region Generic Messenger
+// #region Generic Messenger
 
 type MessageTypes = string;
 
@@ -25,9 +25,9 @@ type MessageListener<K extends MessageTypes> = (
 
 type MessageListenerMap<K extends MessageTypes> = { [type in K]: MessageListener<any> };
 
-//#endregion
+// #endregion
 
-//#region Parent Messenger
+// #region Parent Messenger
 
 type ParentMessageTypes = 'get-episode-information';
 
@@ -47,9 +47,9 @@ type ParentMessageListener<T extends ParentMessageTypes> = (
 
 type ParentMessageListenerMap = { [type in ParentMessageTypes]: ParentMessageListener<type> };
 
-//#endregion
+// #endregion
 
-//#region Runtime Messenger
+// #region Runtime Messenger
 
 type RuntimeMessageTypes =
   | '@anime-skip/open-all-settings'
@@ -75,9 +75,9 @@ type RuntimeMessageListener<T extends RuntimeMessageTypes> = (
 
 type RuntimeMessageListenerMap = { [type in RuntimeMessageTypes]: RuntimeMessageListener<type> };
 
-//#endregion
+// #endregion
 
-//#region Context Menu Messenger
+// #region Context Menu Messenger
 
 type ContextMenuMessageTypes = 'setup-context-menu' | 'remove-context-menu';
 
@@ -100,4 +100,4 @@ type ContextMenuMessageListenerMap = {
   [type in ContextMenuMessageTypes]: ContextMenuMessageListener<type>;
 };
 
-//#endregion
+// #endregion

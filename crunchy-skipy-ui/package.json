@@ -12,13 +12,14 @@
     "build": "set \"INLINE_RUNTIME_CHUNK=false\" && node webpack/build.js",
     "start": "set \"INLINE_RUNTIME_CHUNK=false\" && node webpack/webserver.js",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
-    "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
-    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
+    "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
+    "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx}",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "dependencies": {
     "@hot-loader/react-dom": "^17.0.2",
     "@reduxjs/toolkit": "^1.8.3",
+    "@types/react-redux": "^7.1.24",
     "axios": "^0.27.2",
     "fs": "0.0.1-security",
     "net": "^1.0.2",

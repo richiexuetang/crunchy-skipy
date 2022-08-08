@@ -9,19 +9,19 @@ export interface AuthenticationState {
 }
 
 export const initialState: AuthenticationState = {
-    basicToken: localStorage.getItem('Basic') ?? '',
-    bearerToken: localStorage.getItem('Bearer') ?? '',
-    invalidPageAccess: true,
-    hasAuthenticated: 
+  basicToken: localStorage.getItem('Basic') ?? '',
+  bearerToken: localStorage.getItem('Bearer') ?? '',
+  invalidPageAccess: true,
+  hasAuthenticated: 
         (window.location.href.includes('beta.crunchyroll.com') && localStorage.getItem('Bearer') !== '')
 }
 
 export default createReducer(initialState, (builder) => {
-    builder
-        .addCase(setBasicToken, (state, action) => {
-            state.basicToken = action.payload;
-        })
-        .addCase(setBearerTokenAndAuthenticate, (state, action) => {
-            state.hasAuthenticated = action.payload;
-        })
+  builder
+    .addCase(setBasicToken, (state, action) => {
+      state.basicToken = action.payload;
+    })
+    .addCase(setBearerTokenAndAuthenticate, (state, action) => {
+      state.hasAuthenticated = action.payload;
+    })
 });

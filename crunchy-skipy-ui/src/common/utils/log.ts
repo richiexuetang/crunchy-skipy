@@ -9,7 +9,7 @@
 type LogFn = typeof console.log;
 
 const SHOULD_LOG = true;
-    //EXTENSION_MODE === 'dev' || EXTENSION_MODE === 'test' || EXTENSION_MODE === 'staged';
+// EXTENSION_MODE === 'dev' || EXTENSION_MODE === 'test' || EXTENSION_MODE === 'staged';
 const LABEL = 'CrunchySkipt';
 const GREY_LABEL_STYLE =
     'color: black; background-color: #d8d8d8; padding: 2px 4px; border-radius: 2px; font-weight: bold';
@@ -23,46 +23,46 @@ const RED_LABEL_STYLE =
     'color: black; background-color: #fd6579; padding: 2px 4px; border-radius: 2px; font-weight: bold';
 
 function print(logFn: LogFn, style: string, ...args: any[]) {
-    if (typeof args[0] === 'string') {
-        const newArgs = [...args];
-        logFn(`%c${LABEL}%c ${newArgs.shift()}`, style, '', ...newArgs);
-    } else {
-        logFn(`%c${LABEL}`, style, ...args);
-    }
+  if (typeof args[0] === 'string') {
+    const newArgs = [...args];
+    logFn(`%c${LABEL}%c ${newArgs.shift()}`, style, '', ...newArgs);
+  } else {
+    logFn(`%c${LABEL}`, style, ...args);
+  }
 }
 
 export function debug(...args: any[]) {
-    if (SHOULD_LOG) print(console.debug, GREY_LABEL_STYLE, ...args);
+  if (SHOULD_LOG) print(console.debug, GREY_LABEL_STYLE, ...args);
 }
 
 export function log(...args: any[]) {
-    if (SHOULD_LOG) print(console.log, BLUE_LABEL_STYLE, ...args);
+  if (SHOULD_LOG) print(console.log, BLUE_LABEL_STYLE, ...args);
 }
 
 export function warn(...args: any[]) {
-    if (SHOULD_LOG) print(console.warn, YELLOW_LABEL_STYLE, ...args);
+  if (SHOULD_LOG) print(console.warn, YELLOW_LABEL_STYLE, ...args);
 }
 
 export function error(...args: any[]) {
-    if (SHOULD_LOG) print(console.error, RED_LABEL_STYLE, ...args);
+  if (SHOULD_LOG) print(console.error, RED_LABEL_STYLE, ...args);
 }
 
 export function loadedLog(file: string): void {
-    if (SHOULD_LOG) print(console.log, PURPLE_LABEL_STYLE, `Loaded ${file}`);
+  if (SHOULD_LOG) print(console.log, PURPLE_LABEL_STYLE, `Loaded ${file}`);
 }
 
 export function groupCollapsed(
-    label: string,
-    callback: (fns: { log: LogFn; warn: LogFn; error: LogFn; debug: LogFn }) => void
+  label: string,
+  callback: (fns: { log: LogFn; warn: LogFn; error: LogFn; debug: LogFn }) => void
 ) {
-    if (SHOULD_LOG) {
-        print(console.groupCollapsed, BLUE_LABEL_STYLE, label);
-        callback({
-            debug: console.debug,
-            error: console.error,
-            log: console.log,
-            warn: console.warn,
-        });
-        console.groupEnd();
-    }
+  if (SHOULD_LOG) {
+    print(console.groupCollapsed, BLUE_LABEL_STYLE, label);
+    callback({
+      debug: console.debug,
+      error: console.error,
+      log: console.log,
+      warn: console.warn,
+    });
+    console.groupEnd();
+  }
 }
