@@ -13,7 +13,7 @@ export interface InferredEpisodeInfo {
 export default function setupParent(
   service: Service,
   options: {
-        getEpisodeInfo(): any;
+        getEpisodeInfo(): Promise<InferredEpisodeInfo> | InferredEpisodeInfo;
     }
 ): void {
   // Sites using HTML5 History mode don't update immediately, so we track the url to know if we

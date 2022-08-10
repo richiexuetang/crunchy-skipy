@@ -18,7 +18,7 @@ export function initMessenger() {
         return sender.tab?.url;
       },
     },
-    ['get-episode-infomation']
+    ['get-episode-information']
   );
   log('Messenger from background messenger is: ', Messenger);
 }

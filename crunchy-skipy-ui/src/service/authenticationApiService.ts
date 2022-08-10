@@ -1,22 +1,23 @@
+import { TokenResponseDto } from '../api';
 import { authenticationApi } from './network-agents';
 
-const postTokenInformation = async (
+export const postTokenInformation = async (
   requestBody: string,
-  onSuccess: () => void,
+  onSuccess: (data: TokenResponseDto) => void,
   onError: () => void,
-): Promise<any> => {
+): Promise<void> => {
   try {
-    await authenticationApi.postToken(requestBody);
-    onSuccess();
+    const { data } = await authenticationApi.postToken(requestBody);
+    onSuccess(data);
   } catch (error) {
     onError();
   }
 }
 
-const getIndexData = async (
+export const getIndexData = async (
   onSuccess: () => void,
   onError: () => void,
-): Promise<any> => {
+): Promise<void> => {
   try {
     await authenticationApi.getIndex();
     onSuccess();
@@ -24,8 +25,3 @@ const getIndexData = async (
     onError();
   }
 }
-
-export default {
-  postTokenInformation,
-  getIndexData,
-};

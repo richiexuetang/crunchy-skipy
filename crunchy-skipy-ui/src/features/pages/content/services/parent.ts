@@ -2,22 +2,32 @@ import { error, loadedLog, log } from '../../../../common/utils/log';
 import setupParent from '../../../../common/utils/setupParent';
 import { waitUntil } from '../../../../common/utils/time';
 import { getService } from './util';
+import { postTokenInformation } from '../../../../service/authenticationApiService';
+import { TokenResponseDto } from '../../../../api/contracts';
+
+
+const tokenSuccess = (response: TokenResponseDto) => {
+  log('postToken request succuessful with response', response);
+
+  chrome.storage.local.set({'Authorization': `Bearer ${response.access_token}`});
+  log('Chrome local storage is updated', chrome.storage.local.get('Authorization'));
+}
+
+const tokenFailure = () => {
+  error('postToken request failed');
+};
 
 /**
    * Returns episode information.
    *
    * @param identifier Crunchyroll episode identifier.
    */
-const getEpisodeInformation = async (identifier: string): Promise<any> => {
-  /* const route = `/objects/${identifier}`;
-   console.log('getep route', route);
-
-    const response = await this.request({ route });
-    console.log('getEpisodeInformations response data', response.data);
-    return response.data; */
+const authenticateWithToken = async (): Promise<any> => {
+  // call token endpoint to get access token 
+  postTokenInformation('', tokenSuccess, tokenFailure);
 };
 
-const getEpisodeInfo = async () => {
+export const getEpisodeInfo = async () => {
   const pageHasLoaded = () =>
     Promise.resolve(
       document.querySelector('.erc-current-media-info') != null ||
@@ -27,12 +37,14 @@ const getEpisodeInfo = async () => {
   await waitUntil(pageHasLoaded, 10 * 1000, 1, 200);
   log('Page has loaded!!!!');
 
+  authenticateWithToken();
+  
   const showElement = document.querySelector('.erc-current-media-info .show-title-link');
   if (showElement != null) {
     const show = showElement?.textContent;
     const episodeAndNumber =
             document.querySelector('.erc-current-media-info .title')?.textContent ?? '';
-    const groups = /([0-9]+)\s*-\s*(.+)$/.exec(episodeAndNumber);
+    const groups = /(\d+)\s*-\s*(.+)$/.exec(episodeAndNumber);
 
     const episode = groups?.[2];
     const number = groups?.[1];

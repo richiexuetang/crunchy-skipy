@@ -20,18 +20,18 @@ export const setBearerTokenAndAuthenticate = createAction('setBearerTokenAndAuth
 });
 
 export const authenticateWithBasic = (): AppThunk => async (dispatch) => {
-    try {
-        const basicAuth = localStorage.getItem('Authorization')?.split(' ');
-        if (basicAuth && basicAuth[0] === 'Basic') {
-            const { data } = await authenticationApi.postToken('grant_type=etp_rt_cookie');
-            log('data from postToken', data);
+  try {
+    const basicAuth = localStorage.getItem('Authorization')?.split(' ');
+    if (basicAuth && basicAuth[0] === 'Basic') {
+      const { data } = await authenticationApi.postToken('grant_type=etp_rt_cookie');
+      log('data from postToken', data);
 
-            localStorage.setItem('Authorization', `Bearer ${data.access_token}`);
+      localStorage.setItem('Authorization', `Bearer ${data.access_token}`);
 
-            const indexResponse = await authenticationApi.getIndex();
-            log('indexResponse is:', indexResponse);
-        }
-    } catch (err) {
-        error('setBearerToken failed with:', err);
+      const indexResponse = await authenticationApi.getIndex();
+      log('indexResponse is:', indexResponse);
     }
+  } catch (err) {
+    error('setBearerToken failed with:', err);
+  }
 }

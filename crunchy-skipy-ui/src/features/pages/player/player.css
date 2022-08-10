@@ -1,0 +1,24 @@
+#player {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border: 1px solid #06D6A0;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0 40px 0;
+    background-color: #fff;
+    z-index: 9999;
+    overflow-y: scroll;
+
+    text-align: center;
+    padding: 20px 0;
+    color: #06D6A0;
+
+    width: 360px;
+    height: 600px;
+}
+
+q {
+    font-family: Times, "Times New Roman", serif;
+    font-size: 2em;
+  }
+  

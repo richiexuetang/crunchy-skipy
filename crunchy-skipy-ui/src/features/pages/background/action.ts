@@ -1,10 +1,11 @@
 import { loadedLog, log } from '../../../common/utils/log';
+import { getEpisodeInfo } from '../content/services/parent';
 
 export function initAction() {
   loadedLog('background/action.ts');
 
   async function onTabChanged(tab: chrome.tabs.Tab) {
-    if (!tab.active || !tab.url) return;
+    if (!tab.active || !tab.url || !tab.url.includes('beta.crunchyroll.com')) return;
   }
 
   // #region Tab actions
@@ -27,9 +28,9 @@ export function initAction() {
   // #endregion
 
   // #region Storage actions
-    chrome.storage.onChanged.addListener(async (changes: chrome.storage.StorageChange, area: string): Promise<void> => {
+  // chrome.storage.onChanged.addListener(async (changes: chrome.storage.StorageChange, area: string): Promise<void> => {
 
-    });
+  // });
   // #endregion
 
 }
